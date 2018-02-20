@@ -1,0 +1,30 @@
+spring MVC 步骤：
+	1. 把所需jar拷贝到工程目录下WEB-INF/lib
+	2. 配置WEB.xml，配置前端控制器
+	org.springframework.web.servlet.DispatcherServlet
+	  <servlet>
+	  		<servlet-name>springmvc</servlet-name>
+	  		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>springmvc</servlet-name>
+	  	<url-pattern>*.do</url-pattern>
+	  </servlet-mapping>
+	3.  创建spring mvc控制核心配置：springmvc-servlet.xml
+		前端控制器（servlet的名称）的名称+“-servlet.xml”
+		
+		配置控制器
+		<bean id="login" name="/login.do" class="com.beifeng.controller.LoginController"></bean>
+		
+		配置试图解析器
+		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+			<!-- 前缀 -->
+			<property name="prefix" value="/jsp/"></property>
+			<!-- 后缀 -->
+			<property name="suffix" value=".jsp"></property>
+		</bean>
+	4.编写控制器类 LoginController 必须继承AbstractController 重写handleRequestInternal
+	
+	 返回数据和试图	ModelAndView mav = new ModelAndView("index");	
+	
+	5. 编写JSP页面 显示数据
